@@ -5,9 +5,11 @@
 
 {% block content %}
 <div class="grid grid-cols-5 gap-3">
+    {% if item.image %}
     <div class="col-span-3">
         <img src="{{ item.image.url }}" class="rounded-xl" style='max-height: 700px;'>
     </div>
+    {% endif %}
 
     <div class="col-span-2 p-6 bg-gray-100 rounded-xl">
         <h1 class="mb-6 text-3xl">{{ item.name }}</h1>
@@ -41,9 +43,11 @@
         {% for item in related_items %}
             <div>
                 <a href="{% url 'item:detail' item.id %}">
+                    {% if item.image %}
                     <div>
                         <img src="{{ item.image.url }}" class="rounded-t-xl">
                     </div>
+                    {% endif %}
 
                     <div class="p-6 bg-white rounded-b-xl">
                         <h2 class="text-2xl">{{ item.name }}</h2>

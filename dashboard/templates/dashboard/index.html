@@ -1,21 +1,19 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Welcome{% endblock %}
+{% block title %}Welcome {{ request.user.username }}{% endblock %}
 
 {% block content %}
 {% if items %}
 <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
-        <h2 class="mb-12 text-2xl text-center">Newest items</h2>
+        <h2 class="mb-12 text-2xl text-center">Your Items</h2>
 
         <div class="grid grid-cols-3 gap-3">
             {% for item in items %}
                 <div style='max-height: 650px; margin-bottom: 30px;' >
                     <a href="{% url 'item:detail' item.id %}">
-                        {% if item.image %}
                         <div style='max-height: 500px; overflow: hidden'>
                             <img src="{{ item.image.url }}" class="rounded-t-xl">
                         </div>
-                        {% endif %}
 
                         <div class="p-6 bg-white rounded-b-xl">
                             <h2 class="text-2xl">{{ item.name }}</h2>
@@ -27,24 +25,23 @@
             {% endfor %}
         </div>
     </div>
-    {% else %}
-    <p class='text-red-300 text-center'>No Items To Show</p>
-    {% endif%}
+{% else %}
+<p class='text-red-300 text-center'>No Items To Show</p>
+{% endif%}
     <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
         <h2 class="mb-12 text-2xl text-center">Categories</h2>
 
         <div class="grid grid-cols-3 gap-3">
             {% for category in categories %}
             <div>
-                <a href="{% url 'core:index' category.name  %}">
+                <a href="{% url 'dashboard:index' category.name  %}">
                     <div class="p-6 bg-white rounded-b-xl">
                         <h2 class="text-2xl">{{ category.name }}</h2>
-                        <p class="text-gray-500">{{ category.items.count }} items</p>
                     </div>
                 </a>
             </div>
                 {% endfor %}
-                <a href="{% url 'core:index' 'all'  %}">
+                <a href="{% url 'dashboard:index' 'all'  %}">
                     <div class="p-6 bg-white rounded-b-xl">
                         <h2 class="text-2xl">All</h2>
                         <p class="text-gray-500">{{ total_items }} items</p>

@@ -38,7 +38,6 @@ def edit(request, pk):
             return redirect('item:detail', pk=pk)
         else:
             print('invalid form ')
-    print('edit', pk)
     item = get_object_or_404(Item, pk=pk)
     form = EditItemForm(instance=item)
     content = {'form': form, 'pk': pk}
