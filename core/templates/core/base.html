@@ -11,7 +11,7 @@
 
         <div class='space-x-6'>
             <a href='{% url 'item:new' %}' class='text-xl font-semibold hover:text-gray-500'>Add New</a>
-            <a href='/' class='text-xl font-semibold hover:text-gray-500'>Browse</a>
+            <a href='{% url 'item:browse' %}' class='text-xl font-semibold hover:text-gray-500'>Browse</a>
             {% if user.is_authenticated %}
             <a href='{% url 'core:login' %}' class='text-sm'>{{ user.username }}</a>
             <a href='{% url 'core:signup' %}' class='px-6 py-3 text-white bg-teal-500 rounded-xl text-md font-semibold hover:bg-teal-700'>Inbox</a>
