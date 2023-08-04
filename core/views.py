@@ -3,10 +3,14 @@ from item.models import Item, Category
 from .forms import SignupForm, LoginForm
 
 # Create your views here.
-def index(request):
-    items = Item.objects.all()
+def index(request, c = 'all'):
+    if c == 'all' or c.isdigit():
+        items = Item.objects.all().order_by('created_at')
+    else:
+        items = Item.objects.filter(category__name = c)
     categories = Category.objects.all()
-    content = {'items': items, 'categories': categories}
+    total_items = Item.objects.count()
+    content = {'items': items, 'categories': categories, 'total_items': total_items}
     return render(request, 'core/index.html', content)
 
 def signup(request):

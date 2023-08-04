@@ -30,15 +30,21 @@
 
         <div class="grid grid-cols-3 gap-3">
             {% for category in categories %}
-                <div>
-                    <a href="#">
-                        <div class="p-6 bg-white rounded-b-xl">
-                            <h2 class="text-2xl">{{ category.name }}</h2>
-                            <p class="text-gray-500">{{ category.items.count }} items</p>
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
+            <div>
+                <a href="{% url 'core:index' category.name  %}">
+                    <div class="p-6 bg-white rounded-b-xl">
+                        <h2 class="text-2xl">{{ category.name }}</h2>
+                        <p class="text-gray-500">{{ category.items.count }} items</p>
+                    </div>
+                </a>
+            </div>
+                {% endfor %}
+                <a href="{% url 'core:index' 'all'  %}">
+                    <div class="p-6 bg-white rounded-b-xl">
+                        <h2 class="text-2xl">All</h2>
+                        <p class="text-gray-500">{{ total_items }} items</p>
+                    </div>
+                </a>
         </div>
     </div>
 {% endblock %}

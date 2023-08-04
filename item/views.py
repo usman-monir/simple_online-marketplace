@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Item
 from .forms import NewItemForm, EditItemForm
@@ -11,7 +12,7 @@ def detail(request, pk):
     return render(request, 'item/detail.html', content)
 
 
-@login_required
+@login_required(login_url='/login')
 def new(request):
     if request.method == 'POST':
         form = NewItemForm(request.POST, request.FILES)
@@ -19,13 +20,15 @@ def new(request):
             item= form.save(commit=False)
             item.created_by = request.user
             item.save()
-            return redirect('item:detail', pk=item.pk)
+            print('item created',item)
+            return redirect(reverse('item:detail', args=[item.pk]))
     form = NewItemForm()
     content = {'form': form}
+    print('form......')
     return render(request, 'item/new.html', content)
 
 
-@login_required
+@login_required(login_url='/login')
 def edit(request, pk):
     if request.method == 'POST':
         item = get_object_or_404(Item, pk=pk)
@@ -43,7 +46,7 @@ def edit(request, pk):
 
 
 
-@login_required
+@login_required(login_url='/login')
 def delete(request, pk):
     item = get_object_or_404(Item, pk=pk)
     item.delete()
