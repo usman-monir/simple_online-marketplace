@@ -23,3 +23,6 @@ class Item(models.Model):
     image = models.ImageField(blank=True, null=True, upload_to='item_images')
     created_by = models.ForeignKey(User, related_name='items', on_delete=models.CASCADE)
     category = models.ForeignKey(Category, related_name='items', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name

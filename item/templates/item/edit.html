@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+{% block title %} Edit Item {% endblock %}
+{% block content %}
+<form action="{% url 'item:edit' pk %}" method="POST" style='max-width: 900px; margin: 0 auto;' enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <button class="py-4 px-8 my-5 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Edit</button>
+</form>
+{% endblock %}
