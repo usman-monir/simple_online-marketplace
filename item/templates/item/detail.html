@@ -18,7 +18,8 @@
 
         {% if item.description %}
             <p class="text-gray-700">
-                <strong class="text-gray-500">Description: </strong> {{ item.description }}
+                <strong class="text-gray-500">Description: </strong> {{ item.description }}</br>
+                <strong class="text-gray-500">Owner: </strong> {{ item.created_by.username }}
                 <bold><p class="text-red-500">{% if item.is_sold %}Item is Sold!{% endif%}</p></bold>
             </p>
         {% endif %}
@@ -31,7 +32,7 @@
                 <a href="{% url 'item:delete' item.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-red-500 text-white rounded-xl">Delete</a>
             </div>
         {% else %}
-            <a href="" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Contact seller</a>
+            <a href="{% url 'conversation:new' item.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Contact seller</a>
         {% endif %}
     </div>
 </div>
